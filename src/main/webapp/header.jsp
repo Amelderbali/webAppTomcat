@@ -1,21 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: helmi
-  Date: 11/27/2024
-  Time: 3:13 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="navbar navbar-expand-lg navbar-dark bg-primary">
+<%@ page language="java" %>
+<header>
     <div class="container">
-        <a class="navbar-brand" href="index.jsp">Mon Application</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="annonces">Annonces</a>
-                </li>
+        <div class="navbar">
+            <div class="logo">
+                MonBonCoin
+            </div>
+            <ul>
+                <li><a href="index.jsp">Accueil</a></li>
+                <li><a href="annonces">Annonces</a></li>
+                <li><a href="contact.jsp">Contact</a></li>
+                <li><a href="a-propos.jsp">À propos</a></li>
             </ul>
         </div>
     </div>
-</div>
-
+</header>

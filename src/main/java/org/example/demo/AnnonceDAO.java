@@ -9,7 +9,7 @@ public class AnnonceDAO {
     // Méthode pour récupérer toutes les annonces
     public List<Annonce> getAllAnnonces() throws SQLException {
         List<Annonce> annonces = new ArrayList<>();
-        String query = "SELECT * FROM annonce";
+        String query = "SELECT id, titre, description, image FROM annonce";
 
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
@@ -20,6 +20,7 @@ public class AnnonceDAO {
                 annonce.setId(resultSet.getInt("id"));
                 annonce.setTitre(resultSet.getString("titre"));
                 annonce.setDescription(resultSet.getString("description"));
+                annonce.setImage(resultSet.getString("image"));
                 annonces.add(annonce);
             }
         }
@@ -42,6 +43,7 @@ public class AnnonceDAO {
                 annonce.setId(resultSet.getInt("id"));
                 annonce.setTitre(resultSet.getString("titre"));
                 annonce.setDescription(resultSet.getString("description"));
+                annonce.setImage(resultSet.getString("image"));
             }
         }
 

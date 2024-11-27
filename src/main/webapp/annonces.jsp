@@ -4,17 +4,24 @@
 <html>
 <head>
     <title>Liste des annonces</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1>Liste des annonces</h1>
-<ul>
-    <c:forEach var="annonce" items="${annonces}">
-        <li>
-            <a href="detailAnnonce?id=${annonce.id}">
-                <strong>${annonce.titre}</strong>
-            </a>
-        </li>
-    </c:forEach>
-</ul>
+<%@ include file="header.jsp" %>
+<div class="container">
+
+    <h1>Liste des annonces</h1>
+    <ul>
+        <c:forEach var="annonce" items="${annonces}">
+            <li>
+                <h2>${annonce.titre}</h2>
+                <a href="detailAnnonce?id=${annonce.id}" class="btn">
+                    <strong>View Details</strong>
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
+<%@ include file="footer.jsp" %>
 </body>
 </html>

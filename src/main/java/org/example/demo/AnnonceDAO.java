@@ -1,0 +1,51 @@
+package org.example.demo;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AnnonceDAO {
+
+    // Méthode pour récupérer toutes les annonces
+    public List<Annonce> getAllAnnonces() throws SQLException {
+        List<Annonce> annonces = new ArrayList<>();
+        String query = "SELECT * FROM annonce";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                Annonce annonce = new Annonce();
+                annonce.setId(resultSet.getInt("id"));
+                annonce.setTitre(resultSet.getString("titre"));
+                annonce.setDescription(resultSet.getString("description"));
+                annonces.add(annonce);
+            }
+        }
+
+        return annonces;
+    }
+
+    public Annonce getAnnonceById(int id) throws SQLException {
+        Annonce annonce = null;
+        String query = "SELECT * FROM annonce WHERE id = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                annonce = new Annonce();
+                annonce.setId(resultSet.getInt("id"));
+                annonce.setTitre(resultSet.getString("titre"));
+                annonce.setDescription(resultSet.getString("description"));
+            }
+        }
+
+        return annonce;
+    }
+
+}

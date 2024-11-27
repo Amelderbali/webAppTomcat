@@ -3,11 +3,17 @@
 <html>
 <head>
     <title>Accueil</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1>Bienvenue sur notre application</h1>
-<form action="annonces" method="get">
-    <button type="submit">Voir les annonces</button>
-</form>
+<%@ include file="header.jsp" %>
+
+<div class="container">
+    <h1>Bienvenue sur Mon Application</h1>
+    <p>Découvrez les dernières annonces et trouvez ce que vous cherchez.</p>
+    <a href="annonces" class="btn">Voir les annonces</a>
+</div>
+
+<%@ include file="footer.jsp" %>
 </body>
 </html>

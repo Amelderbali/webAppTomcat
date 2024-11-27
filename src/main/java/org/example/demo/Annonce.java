@@ -1,22 +1,19 @@
 package org.example.demo;
 
-
-
-
-
-
 public class Annonce {
     private int id;
     private String titre;
     private String description;
+    private String image;
 
     public Annonce() {
     }
 
-    public Annonce(int id, String titre, String description) {
+    public Annonce(int id, String titre, String description, String image) {
         this.id = id;
         this.titre = titre;
         this.description = description;
+        this.image = image;
     }
 
     public int getId() {
@@ -41,6 +38,14 @@ public class Annonce {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override

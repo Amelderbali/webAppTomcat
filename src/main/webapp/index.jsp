@@ -13,10 +13,7 @@
     <p>Découvrez les dernières annonces et trouvez ce que vous cherchez.</p>
 
     <!-- Formulaire de recherche -->
-    <form action="annonces" method="get" class="search-form">
-        <input type="text" name="keywords" placeholder="Rechercher des annonces..." required>
-        <button type="submit">Rechercher</button>
-    </form>
+
 
     <a href="annonces" class="btn">Voir toutes les annonces</a>
 </div>

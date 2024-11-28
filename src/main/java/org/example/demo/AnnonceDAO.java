@@ -50,4 +50,35 @@ public class AnnonceDAO {
         return annonce;
     }
 
-}
+
+        public List<Annonce> searchAnnonces(String keywords) throws SQLException {
+            List<Annonce> annonces = new ArrayList<>();
+            String query = "SELECT * FROM annonce WHERE titre ILIKE ? OR description ILIKE ?";
+
+            try (Connection connection = DatabaseConnection.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query)) {
+
+                String keywordPattern = "%" + keywords + "%";
+                statement.setString(1, keywordPattern);
+                statement.setString(2, keywordPattern);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    Annonce annonce = new Annonce();
+                    annonce.setId(resultSet.getInt("id"));
+                    annonce.setTitre(resultSet.getString("titre"));
+                    annonce.setDescription(resultSet.getString("description"));
+                    annonce.setImage(resultSet.getString("image"));
+                    annonces.add(annonce);
+                }
+            }
+
+            return annonces;
+        }
+    }
+
+
+
+
+

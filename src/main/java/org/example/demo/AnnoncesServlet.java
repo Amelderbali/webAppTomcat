@@ -1,12 +1,8 @@
 package org.example.demo;
 
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,10 +10,21 @@ import java.util.List;
 @WebServlet("/annonces")
 public class AnnoncesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String keywords = request.getParameter("keywords");
+
         AnnonceDAO annonceDAO = new AnnonceDAO();
+        List<Annonce> annonces = null;
+
         try {
-            // Récupérer toutes les annonces
-            List<Annonce> annonces = annonceDAO.getAllAnnonces();
+            if (keywords != null && !keywords.trim().isEmpty()) {
+                // Recherche avec mots-clés
+                annonces = annonceDAO.searchAnnonces(keywords);
+                request.setAttribute("searchQuery", keywords);
+            } else {
+                // Récupérer toutes les annonces
+                annonces = annonceDAO.getAllAnnonces();
+            }
 
             // Ajouter les annonces comme attribut pour la JSP
             request.setAttribute("annonces", annonces);

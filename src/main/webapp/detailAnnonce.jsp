@@ -8,16 +8,15 @@
 <body>
 <%@ include file="header.jsp" %>
 
-<h1>${annonce.titre}</h1>
 <div class="container">
-<div class="image-container">
+    <h1>${annonce.titre}</h1>
     <img src="${annonce.image}" alt="${annonce.titre}" class="detail-image">
+    <div class="detail-content">
+        <p>${annonce.description}</p>
+        <a href="annonces" class="btn">Retour à la liste des annonces</a>
+    </div>
 </div>
 
-<p>${annonce.description}</p>
-<a href="annonces" class="btn">Retour à la liste des annonces</a>
-</div>
 <%@ include file="footer.jsp" %>
-
 </body>
 </html>

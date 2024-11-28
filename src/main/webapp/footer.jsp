@@ -1,4 +1,4 @@
-<%@ page language="java" %>
+
 <footer>
     <div class="container">
         <p>&copy; 2024 Mon Application. Tous droits réservés.</p>

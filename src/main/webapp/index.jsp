@@ -11,7 +11,14 @@
 <div class="container">
     <h1>Bienvenue sur Mon Application</h1>
     <p>Découvrez les dernières annonces et trouvez ce que vous cherchez.</p>
-    <a href="annonces" class="btn">Voir les annonces</a>
+
+    <!-- Formulaire de recherche -->
+    <form action="annonces" method="get" class="search-form">
+        <input type="text" name="keywords" placeholder="Rechercher des annonces..." required>
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <a href="annonces" class="btn">Voir toutes les annonces</a>
 </div>
 
 <%@ include file="footer.jsp" %>

@@ -1,23 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Détail de l'annonce</title>
+    <title>${annonce.titre}</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<%@ include file="header.jsp" %>
+<jsp:include page="header.jsp" />
 
-<h1>${annonce.titre}</h1>
 <div class="container">
-<div class="image-container">
-    <img src="${annonce.image}" alt="${annonce.titre}" class="detail-image">
+    <h1>${annonce.titre}</h1>
+    <div class="image-container">
+        <img src="${annonce.image}" alt="${annonce.titre}" class="detail-image">
+    </div>
+    <p>${annonce.description}</p>
+    <a href="annonces" class="btn">Retour au annonces</a>
 </div>
 
-<p>${annonce.description}</p>
-<a href="annonces" class="btn">Retour à la liste des annonces</a>
-</div>
-<%@ include file="footer.jsp" %>
-
+<jsp:include page="footer.jsp" />
 </body>
 </html>

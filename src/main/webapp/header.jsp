@@ -6,7 +6,7 @@
                 MonBonCoin
             </div>
             <ul>
-                <li><a href="index.jsp">Accueil</a></li>
+                <li><a href="index.jsp">Home</a></li>
                 <li><a href="annonces">Annonces</a></li>
                 <li><a href="contact.jsp">Contact</a></li>
                 <li><a href="a-propos.jsp">À propos</a></li>

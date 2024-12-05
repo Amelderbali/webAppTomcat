@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.data;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -6,10 +6,9 @@ import java.util.List;
 
 public class AnnonceDAO {
 
-    // Méthode pour récupérer toutes les annonces
     public List<Annonce> getAllAnnonces() throws SQLException {
         List<Annonce> annonces = new ArrayList<>();
-        String query = "SELECT id, titre, description, image FROM annonce";
+        String query = "SELECT id, titre, description, image FROM annonces";
 
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
@@ -30,7 +29,7 @@ public class AnnonceDAO {
 
     public Annonce getAnnonceById(int id) throws SQLException {
         Annonce annonce = null;
-        String query = "SELECT * FROM annonce WHERE id = ?";
+        String query = "SELECT id, titre, description, image FROM annonces WHERE id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -48,6 +47,32 @@ public class AnnonceDAO {
         }
 
         return annonce;
+    }
+
+    public List<Annonce> searchAnnonces(String motsCles) throws SQLException {
+        List<Annonce> annonces = new ArrayList<>();
+        String query = "SELECT id, titre, description, image FROM annonces WHERE titre ILIKE ? OR description ILIKE ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            String searchPattern = "%" + motsCles + "%";
+            preparedStatement.setString(1, searchPattern);
+            preparedStatement.setString(2, searchPattern);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Annonce annonce = new Annonce();
+                annonce.setId(resultSet.getInt("id"));
+                annonce.setTitre(resultSet.getString("titre"));
+                annonce.setDescription(resultSet.getString("description"));
+                annonce.setImage(resultSet.getString("image"));
+                annonces.add(annonce);
+            }
+        }
+
+        return annonces;
     }
 
 }

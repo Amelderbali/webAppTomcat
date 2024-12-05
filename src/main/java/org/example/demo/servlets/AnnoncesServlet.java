@@ -1,6 +1,9 @@
-package org.example.demo;
+package org.example.demo.servlets;
 
 
+
+import org.example.demo.data.Annonce;
+import org.example.demo.data.AnnonceDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +16,19 @@ import java.util.List;
 
 @WebServlet("/annonces")
 public class AnnoncesServlet extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AnnonceDAO annonceDAO = new AnnonceDAO();
+
         try {
-            // Récupérer toutes les annonces
             List<Annonce> annonces = annonceDAO.getAllAnnonces();
 
-            // Ajouter les annonces comme attribut pour la JSP
             request.setAttribute("annonces", annonces);
 
-            // Transférer à annonces.jsp
             request.getRequestDispatcher("annonces.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur lors du chargement des annonces.");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error loading ads.");
         }
     }
 }

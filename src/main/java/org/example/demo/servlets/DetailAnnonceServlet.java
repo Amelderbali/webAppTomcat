@@ -1,4 +1,7 @@
-package org.example.demo;
+package org.example.demo.servlets;
+
+import org.example.demo.data.Annonce;
+import org.example.demo.data.AnnonceDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +13,13 @@ import java.sql.SQLException;
 
 @WebServlet("/detailAnnonce")
 public class DetailAnnonceServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idParam = request.getParameter("id"); // Récupérer l'ID de l'annonce
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idParam = request.getParameter("id"); // Get the ad ID
+
         if (idParam == null || idParam.isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID de l'annonce manquant.");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ad ID is missing.");
             return;
         }
 
@@ -21,21 +27,18 @@ public class DetailAnnonceServlet extends HttpServlet {
         AnnonceDAO annonceDAO = new AnnonceDAO();
 
         try {
-            // Récupérer les détails de l'annonce
             Annonce annonce = annonceDAO.getAnnonceById(id);
             if (annonce == null) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Annonce introuvable.");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Ad not found.");
                 return;
             }
 
-            // Ajouter les détails de l'annonce comme attribut
             request.setAttribute("annonce", annonce);
 
-            // Transférer à la JSP
             request.getRequestDispatcher("detailAnnonce.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur lors du chargement de l'annonce.");
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error loading ad.");
         }
     }
 }

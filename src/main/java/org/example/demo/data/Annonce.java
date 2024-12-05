@@ -1,4 +1,4 @@
-package org.example.demo;
+package org.example.demo.data;
 
 public class Annonce {
     private int id;
